@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(200),
     },
     content: {
-      type: DataTypes.STRING(900),
+      type: DataTypes.STRING(9000),
     },
     main_img: {
       type: DataTypes.STRING(900),
@@ -19,5 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     date: {
       type: DataTypes.STRING(100),
     },
+  }, {
+    timestamps: false,
   });
 };

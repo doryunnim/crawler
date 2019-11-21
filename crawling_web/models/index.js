@@ -14,5 +14,6 @@ db.Sequelize = Sequelize;
 
 db.User = require('./user')(sequelize, Sequelize);
 db.Event = require('./event')(sequelize, Sequelize);
+db.Brand_list = require('./brand_list')(sequelize, Sequelize);
 
 module.exports = db;

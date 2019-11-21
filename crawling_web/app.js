@@ -5,8 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users');  
+var eventsRouter = require('./routes/events');
 var sequelize = require('./models').sequelize;
+
+var {PythonShell} = require('python-shell');
+
+var options = {
+  mode: 'text',
+  pythonPath: '',
+  pythonOptions: ['-u'],
+  scriptPath: '',
+  args: ['value1', 'value2', 'value3']
+};
 
 var app = express();
 sequelize.sync();
@@ -23,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/events', eventsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,6 +50,30 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+PythonShell.run('../crawler/complete_crawler/subway_crawler.py', options, function(err, results){
+  if(err) throw err;
+
+  console.log('results: %j', results);
+});
+
+PythonShell.run('../crawler/complete_crawler/papajohns_crawler.py', options, function(err, results){
+  if(err) throw err;
+
+  console.log('results: %j', results);
+});
+
+PythonShell.run('../crawler/complete_crawler/burgerking_crawler.py', options, function(err, results){
+  if(err) throw err;
+
+  console.log('results: %j', results);
+});
+
+PythonShell.run('../crawler/complete_crawler/vips_crawler.py', options, function(err, results){
+  if(err) throw err;
+
+  console.log('results: %j', results);
 });
 
 module.exports = app;

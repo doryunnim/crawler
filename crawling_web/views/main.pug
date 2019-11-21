@@ -1,0 +1,40 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title Document
+  link(href='/stylesheets/main.css' rel='stylesheet')
+header
+  h1#symbol
+    a(href='/') &#xC2EC;&#xBCFC;
+  #search
+    input(type='ext' placeholder='브랜드 입력')
+    button &#xAC80;&#xC0C9;
+  #login
+    a(href='') &#xB85C;&#xADF8;&#xC778;
+nav
+  #global_nav
+    ul.nav
+      li
+        a(href='') menu1
+      li
+        a(href='') menu2
+      li
+        a(href='') menu3
+      li
+        a(href='') menu4
+      li
+        a(href='') menu5
+section
+  #container
+    #promotion
+      h1 image
+    h1.sub_title BRAND
+    #brand_list
+      ul.brand_bundle
+      for list in lists
+        li.brand
+          a(href='/events/'+list.brand_name)= list.brand_name
+          
+footer
