@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('crawling-web:server');
+var debug = require('debug')('python-sequelize:server');
 var http = require('http');
 
 /**

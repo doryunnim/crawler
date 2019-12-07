@@ -1,0 +1,13 @@
+extends index
+
+block css
+ 
+  link(href='/stylesheets/main.css' rel='stylesheet')
+
+block content
+    article
+        #event_detail
+            h1= event.title
+            img(src=event.sub_img alt='imgae')
+            p= event.content
+            

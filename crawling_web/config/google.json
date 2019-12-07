@@ -1,0 +1,12 @@
+{
+    "web":{
+        "client_id":"1002155686603-tigofegn3l1jnb2o3nmo3ufllcpphfqj.apps.googleusercontent.com",
+        "project_id":"my-project-node-260812",
+        "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+        "token_uri":"https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret":"u5Ed_F_eaiqjDJLZZelCwLmq",
+        "redirect_uris":["http://localhost:3000/auth/google/callback"],
+        "javascript_origins":["http://localhost:3000"]
+    }
+}

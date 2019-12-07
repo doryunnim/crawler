@@ -1,0 +1,23 @@
+section article .event_list{
+    width: 100%;
+}
+section article .event_list ul{
+    margin: 30px 50px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+section article .event_list ul li{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-bottom: 20px;
+}
+img{
+    display: inline-block;
+    width: 400px;
+    height: 200px;
+    border: 1px solid red;
+}

@@ -1,5 +1,81 @@
-extends layout
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
 
-block content
-  h1= title
-  p Welcome to #{title}
+    title Document
+    link(href='stylesheets/test.css' rel='stylesheet')
+    
+    meta(name='google-signin-client_id')
+    script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+    block css
+  header
+    h1#symbol
+      a(href='/') &#xC2EC;&#xBCFC;
+    #search
+      input(id="search-input" type='text' placeholder='브랜드 입력' name="brand_name")
+      button(id="search-button" type="button") 검색
+    #login
+        span#name
+        input#loginBtn(type='button' value='checking...' onclick="\
+            if(this.value === 'Login'){\
+            gauth.signIn({\
+            scope:'https://www.googleapis.com/auth/calendar'\
+            }).then(function(){\
+            console.log('gauth.signIn()');\
+            checkLoginStatus();\
+            }).then(function(){\
+            login();\
+            });\
+            }else{\
+            gauth.signOut().then(function(){\
+            console.log('gauth.signOut()');\
+            checkLoginStatus();\
+            }); \
+            }\
+        ")
+  nav
+    #global_nav
+      ul.nav
+        li
+          a(href='') menu1
+        li
+          a(href='') menu2
+        li
+          a(href='') menu3
+        li
+          a(href='') menu4
+        li
+          a(href='') menu5
+  section
+    block content
+
+//- script.
+//-     function onSuccess(googleUser) {
+//-       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+//-     }
+//-     function onFailure(error) {
+//-       console.log(error);
+//-     }
+//-     function renderButton() {
+//-       gapi.signin2.render('my-signin2', {
+//-         'scope': 'profile email',
+//-         'width': 240,
+//-         'height': 50,
+//-         'longtitle': true,
+//-         'theme': 'dark',
+//-         'onsuccess': onSuccess,
+//-         'onfailure': onFailure
+//-       });
+//-     }
+script(src='/javascripts/init.js')
+script(src='https://apis.google.com/js/platform.js?onload=init' async='' defer='')
+//- script(src="https://apis.google.com/js/platform.js" async defer)
+//- script(src="https://apis.google.com/js/platform.js?onload=renderButton" async defer)
+script.
+  $('#search-button').on('click', function(){
+    var brand_name = $("#search-input").val()
+    window.location.href =  "/brand/"+ brand_name
+  }  )

@@ -3,14 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');  
-var eventsRouter = require('./routes/events');
-var sequelize = require('./models').sequelize;
+var usersRouter = require('./routes/users');
+var brandRouter = require('./routes/brand');
+const {sequelize}=require('./models');
 
-var {PythonShell} = require('python-shell');
 
+
+// 파이썬모듈 추가
+var {PythonShell}=require('python-shell');
+
+// 옵션객체 설정
 var options = {
   mode: 'text',
   pythonPath: '',
@@ -19,8 +24,14 @@ var options = {
   args: ['value1', 'value2', 'value3']
 };
 
+
+
 var app = express();
 sequelize.sync();
+// passportConfig(passport);
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,10 +42,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(bodyParser().json());
+// app.use(bodyParser.urlencoded({ extended: false}));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/events', eventsRouter);
+app.use('/brand',brandRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,28 +67,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-PythonShell.run('../crawler/complete_crawler/subway_crawler.py', options, function(err, results){
-  if(err) throw err;
+// PythonShell.run('./crawler/lotteriaFinish.py',options,function(err,results){
+//   if(err) throw err;
 
-  console.log('results: %j', results);
-});
+//   console.log('results: %j',results);
+// });
 
-PythonShell.run('../crawler/complete_crawler/papajohns_crawler.py', options, function(err, results){
-  if(err) throw err;
-
-  console.log('results: %j', results);
-});
-
-PythonShell.run('../crawler/complete_crawler/burgerking_crawler.py', options, function(err, results){
-  if(err) throw err;
-
-  console.log('results: %j', results);
-});
-
-PythonShell.run('../crawler/complete_crawler/vips_crawler.py', options, function(err, results){
-  if(err) throw err;
-
-  console.log('results: %j', results);
-});
+//test.py파일을 호출하여 옵션에 설정 된 것들에따라 실행을 하게함
+//노드가 커맨드 라인을 이용해서 소스파일을 실생시킨다고 생각하는게 좋음
 
 module.exports = app;
