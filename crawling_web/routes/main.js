@@ -19,15 +19,4 @@ router.get('/', function(req, res, next) {
     })
 });
 
-// router.get('/login', function(req, res, next){
-//   res.redirect(authUrl);
-// });
-
-// router.get('/auth/google/callback', async function(req, res){
-  
-//   res.redirect("http://localhost:3000");
-//   auth.list();
-// })
-
-
 module.exports = router;

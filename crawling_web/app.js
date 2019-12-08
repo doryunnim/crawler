@@ -8,9 +8,8 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var brandRouter = require('./routes/brand');
+var authRouter = require('./routes/auth');
 const {sequelize}=require('./models');
-
-
 
 // 파이썬모듈 추가
 var {PythonShell}=require('python-shell');
@@ -23,15 +22,9 @@ var options = {
   scriptPath: '',
   args: ['value1', 'value2', 'value3']
 };
-
-
-
+  
 var app = express();
 sequelize.sync();
-// passportConfig(passport);
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,15 +35,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(bodyParser().json());
-// app.use(bodyParser.urlencoded({ extended: false}));
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/brand',brandRouter);
-
-
+app.use('/auth', authRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

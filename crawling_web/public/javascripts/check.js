@@ -81,7 +81,7 @@ $('input:checkbox').on('change', function (e) {
             console.log(xhr.responseText);
         });
 
-    } else if(!check) {
+    } else if (!check) {
         var url = "brand/delbrand/" + brand_name.className
         xhr.open('DELETE', url);
         xhr.setRequestHeader('Content-type', "application/json");
@@ -92,28 +92,29 @@ $('input:checkbox').on('change', function (e) {
     }
 })
 
-$(document).ready(()=>{
-    setTimeout(function() {
+$(document).ready(() => {
+    setTimeout(function () {
         var profile = gauth.currentUser.get().getBasicProfile();
-        var profileEmail = profile.getEmail();
-        var xhr = new XMLHttpRequest();
-        var data = {
-            'user_email': profileEmail,
-        };
-        data = JSON.stringify(data);
+        if (profile) {
+            var profileEmail = profile.getEmail();
+            var xhr = new XMLHttpRequest();
+            var data = {
+                'user_email': profileEmail,
+            };
+            data = JSON.stringify(data);
 
-        xhr.onload = function(){
-            if(xhr.status === 200 || xhr.status === 201){
-                console.log('adsasdasddasdasdas');
-                var likeChecks = JSON.parse(xhr.responseText);
-                likeChecks.map((likeCheck)=>{
-                    var brandCheck = likeCheck.brand_name;
-                    $("input:checkbox[class = '"+ brandCheck + "']").prop("checked", true);
-                });
+            xhr.onload = function () {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    var likeChecks = JSON.parse(xhr.responseText);
+                    likeChecks.map((likeCheck) => {
+                        var brandCheck = likeCheck.brand_name;
+                        $("input:checkbox[class = '" + brandCheck + "']").prop("checked", true);
+                    });
+                }
             }
+            xhr.open('POST', "/");
+            xhr.setRequestHeader('Content-type', "application/json");
+            xhr.send(data);
         }
-        xhr.open('POST', "/");
-        xhr.setRequestHeader('Content-type', "application/json");
-        xhr.send(data);
-    }, 700);
+    }, 1000);
 })
