@@ -1,0 +1,43 @@
+#event_title{
+    width: 100%;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #e5e5e5;
+    background: #fafafa;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+#event_title>h1{
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font: normal 40px HGG,Malgun Gothic,"\B9D1\C740 \ACE0\B515",dotum,"\B3CB\C6C0",sans-serif;
+
+}
+
+
+#event_detail{
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: block;
+}
+
+#event_container{
+    width: 100%;
+    padding: 40px 17% 100px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 30px;
+    text-align: center;
+}

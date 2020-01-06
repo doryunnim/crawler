@@ -1,13 +1,16 @@
 extends index
 
 block css
- 
+  
   link(href='/stylesheets/main.css' rel='stylesheet')
 
 block content
     article
+        h3.page_tit 이벤트
         #event_detail
+          #event_title
             h1= event.title
-            img(src=event.sub_img alt='imgae')
+          #event_container
+            img(src=event.sub_img alt='image')
             p= event.content
             

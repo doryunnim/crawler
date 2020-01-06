@@ -12,16 +12,7 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-    var authorizeDiv = document.getElementById('authorize-div');
-    if (authResult && !authResult.error) {
-        // Hide auth UI, then load client library.
-        authorizeDiv.style.display = 'none';
         loadCalendarApi();
-    } else {
-        // Show auth UI, allowing the user to initiate authorization by
-        // clicking authorize button.
-        authorizeDiv.style.display = 'inline';
-    }
 }
 /**
  * Initiate auth flow in response to user clicking authorize button.
@@ -53,7 +44,6 @@ function listCalendars() {
         if (cals.length > 0) {
             for (i = 0; i < cals.length; i++) {
                 var calendar = cals[i];
-
                 appendPre(calendar.summary + ' (' + calendar.id + ')')
             }
         } else {
@@ -66,6 +56,7 @@ function listCalendars() {
  * the authorized user's calendar. If no events are found an
  * appropriate message is printed.
  */
+
 function listUpcomingEvents() {
     var request = gapi.client.calendar.events.list({
         'calendarId': 'primary',
@@ -73,63 +64,78 @@ function listUpcomingEvents() {
         'timeMin': (new Date()).toISOString(),
         'showDeleted': false,
         'singleEvents': true,
-        'maxResults': 10,
         'orderBy': 'startTime'
     });
     request.execute(function (resp) {
         var events = resp.items;
-        appendPre('Upcoming events:');
         if (events.length > 0) {
-            for (i = 0; i < events.length; i++) {
+            for (var i = 0; i < events.length; i++) {
                 var event = events[i];
                 var when = event.start.dateTime;
                 if (!when) {
                     when = event.start.date;
                 }
-                appendPre(event.summary + ' (' + when + ')')
             }
         } else {
-            appendPre('No upcoming events found.');
         }
+    });
 
-        // gapi.client.calendar.calendarList.list({
-        //     auth: gapi.auth
-        // }, function (err, calendarList) {
-        //     if (err) console.log(err);
+}
 
-            // var deleteCalendarId; // 캘린더 삭제를 위한 아이디 변수
-            // var isCGSCalendar = false; // 'DONGHWAN' 캘린더가 존재하는지 확인하기 위한 변수
+function testAdd() {
+    var profile = gauth.currentUser.get().getBasicProfile();
+    if (profile) {
+        var profileEmail = profile.getEmail();
+        var xhr = new XMLHttpRequest();
+        var data = {
+            'user_email': profileEmail,
+        };
+        data = JSON.stringify(data);
+        var url = "/calendar/add/"
 
-            // // 'DONGHWAN' 캘린더가 있는지 확인
-            // for (var i = 0; i < gapi.client.calendar.calendarList.length; i++) {
-            //     if (gapi.client.calendarList.items[i].summary === 'DONGHWAN') {
-            //         isCGSCalendar = true;
-            //         deleteCalendarId = gapi.client.calendarList.items[i].id;
-            //     }
-            // }
+        xhr.onload = function () {
+            if (xhr.status === 200 || xhr.status === 201) {
+                var addCheck = JSON.parse(xhr.responseText);
+                addCheck.map((add) => {
+                    var brand_name = add.brand_name;
+                    var brand_title = add.title;
+                    var summary = brand_name +" "+ brand_title;
+                    var brand_date = add.date;
+                    var date = brand_date.split('~')
+                    date[0] = date[0].replace('.', '-');
+                    date[0] = date[0].replace('.', '-').trim(date[0]);
+                    date[1] = date[1].replace('.', '-');
+                    date[1] = date[1].replace('.', '-').trim(date[1]);
 
-            // if (isCGSCalendar) {
-            //     //     // 'DONGHWAN' 캘린더가 있다면 캘린더를 지움
-            //     gapi.client.calendar.calendars.delete({
-            //         auth: gapi.auth,
-            //         calendarId: deleteCalendarId
-            //     }, function (err, calendars) {
-            //         if (err) console.log(err);
-            //     });
+                        var event = {
+                            "summary": summary,
+                            "end": {
+                                "dateTime": date[1] + "T17:00:00-07:00"
+                            },
+                            "start": {
+                                "dateTime": date[0] + "T09:00:00-07:00"
+                            },
+                        };
+                        var request_insert = gapi.client.calendar.events.insert({
+                            calendarId: 'primary',
+                            resource: event,
+                        }, function (err, event) {
+                            if (err) {
+                                console.log('There was an error contacting the Calendar service: ' + err);
+                                return;
+                            }
+                            console.log('Event created: %s', event.htmlLink);
+                        });
 
-            // } else {
-            //     //     // 'DONGHWAN' 캘린더가 없다면 캘린더를 만듬
-            //     gapi.client.calendar.calendars.insert({
-            //         auth: gapi.auth,
-            //         resource: {
-            //             summary: 'DONGHWAN'
-            //         }
-            //     }, function (err, calendars) {
-            //         if (err) console.log(err);
-            //     });
-            // }
-        });
-    // });
+                        request_insert.execute((resp) => {})
+                    });
+                }
+            }
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-type', "application/json");
+            xhr.send(data);
+        }
+        alert('구글 캘린더에 등록했습니다.')
 }
 /**
  * Append a pre element to the body containing the given message
@@ -137,8 +143,4 @@ function listUpcomingEvents() {
  *
  * @param {string} message Text to be placed in pre element.
  */
-function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
-}
+

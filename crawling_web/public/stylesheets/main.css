@@ -1,12 +1,15 @@
 *
 {
 	margin:0;
-	padding:0;
+    padding:0;
+    font-family: 'Do Hyeon', sans-serif;
 }
 htlm body
 {
     width: 100%;
     height: 100%;
+    
+
 }
 header{
     display: block;
@@ -15,6 +18,7 @@ header{
     height: 65px;
     z-index: 100;
     min-width: 1280px;
+    
 }
 header a{
     color: black;
@@ -22,9 +26,9 @@ header a{
 header #symbol{
     position: absolute;
     left: 0;
-    top: 50%;
+    top: 30%;
     transform: translate(0, -50%);
-    margin-left: 40px;
+    margin-left: 10px;
 }
 header #search{
     position: absolute;
@@ -33,7 +37,7 @@ header #search{
     top: 50%;
     transform: translate(-50%,-50%);
     width: 420px;
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid coral;
 }
 header #search input{
     width: 90%;
@@ -45,6 +49,8 @@ header #search input{
     text-indent: 5px;
     background: none;
     padding: 0;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 1.2em;
 }
 header #search button{
     display: block;
@@ -56,6 +62,7 @@ header #search button{
     background-position: right center;
     background: none;
     border: none;
+    font-family: 'Do Hyeon', sans-serif;
 }
 header #login{
     position: absolute;
@@ -71,23 +78,30 @@ nav{
     left: 0;
     z-index: 100;
     min-width: 1280px;
-    background-color: #0b0b0d;
+    background-color:rgb(236, 85, 30);
 }
 nav #global_nav{
     width: 100%;
     height: 70px;
-    text-align: center;
     cursor: default;
 }
 nav #global_nav .nav{
     overflow: hidden;
     display: inline-block;
+    
 }
+
 nav #global_nav .nav>li{
+    display: block;
+    position: relative;
     float: left;
-    padding-left: 50px;
-    padding-right: 50px;
+    margin: 0 120px;
+    list-style: none;
+    /* 메뉴창 */
+    
 }
+
+
 nav #global_nav .nav>li>a{
     display: block;
     text-transform: uppercase;
@@ -111,38 +125,94 @@ section #promotion{ /*새로*/
 section .sub_title{
     margin-top: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid coral;
 }
 section h1{ /*새로*/
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 1px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 2.5em;
+    
+    
 }
 #brand_list{
     display: block;
     padding: 20px;
+    
+   
 }
 #brand_list ul{
     text-align: center;
     padding-bottom: 70px;
+    
+    
 }
 #brand_list ul li{
     list-style: none;
     display: inline-block;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 5px;
+    padding-right: 5px;
+    
 }
+
+
+
 a{
     vertical-align: middle;
     text-decoration: none;
     border-style: 1px solid;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 1.5em;
+    color: white;
+    
+}
+
+img{
+    margin-left:7%;
+    margin-top: 30px;
+
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
+}
+
+/* 브랜드 이미지, 이벤트이미지 */
+a>img{
+    -webkit-transform:scale(1);
+    -moz-transform:scale(1);
+    -ms-transform:scale(1); 
+    -o-transform:scale(1);  
+    transform:scale(1);
+    -webkit-transition:.3s;
+    -moz-transition:.3s;
+    -ms-transition:.3s;
+    -o-transition:.3s;
+    transition:.3s;
+
+}
+
+a>img:hover{
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);   
+    -o-transform:scale(1.2);
+    transform:scale(1.2);
 }
 
 
-
+/* 이벤트 리스트, 상세 이미지 */
 .event_list_img, .event_detail_img{
     max-width: 100%;
-    max-height: 100%;
+    max-height: auto;
     vertical-align: top;
+    text-align: center;
 }
 
 .checkcontainer{
@@ -192,8 +262,9 @@ input:checked[type="checkbox"]:after{
     background-color: #fe0f42;
 }
 
+/* 메인 페이지 중앙 버튼 */
 #btn{
-  background:#1AAB8A;
+  background:rgb(238, 89, 34);
   color:#fff;
   border:none;
   position:relative;
@@ -205,11 +276,14 @@ input:checked[type="checkbox"]:after{
   transition:800ms ease all;
   outline:none;
   margin-left: 43%;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.6em;
+  
 }
 
 #btn:hover{
     background:#fff;
-    color:#1AAB8A;
+    color:rgb(238, 89, 34);
 }
 
 #btn:before,#btn:after{
@@ -219,7 +293,7 @@ input:checked[type="checkbox"]:after{
     right:0;
     height:2px;
     width:0;
-    background: #1AAB8A;
+    background: rgb(238, 89, 34);
     transition:400ms ease all;
   }
   #btn:after{
@@ -233,6 +307,87 @@ input:checked[type="checkbox"]:after{
     transition:800ms ease all;
   }
   
+  footer{
+      background-color: gray;
+      width: 100%;
+  }
+
+/* 게시글 */
+#event_title{
+    width: 100%;
+    margin-top: 10px;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #e5e5e5;
+    background: #fafafa;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+#event_title>h1{
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.875rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 2em;
+
+}
+
+#event_detail{
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: block;
+}
+
+#event_container{
+    width: 66%;
+    padding: 40px 17% 100px;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    margin-bottom: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#event_container>img{
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: top;
+    border: none;
+    margin-right: 30%;
+}
+
+.page_tit {
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+    line-height: 100%;
+    
+}
+
+h3{
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-left:200px
+}
+
+
 
   
   

@@ -1,15 +1,19 @@
 extends index
 block css
-  link(href='/stylesheets/event_list.css' rel='stylesheet')
+
   link(href='/stylesheets/main.css' rel='stylesheet')
+  link(href='/stylesheets/event_list.css' rel='stylesheet')
+  
+  
 
 block content
   article
     .event_list
-      ul
-      for event in events
-        li
-            h1=event.title
-            a(href='/brand/'+event.brand_name+'/'+event.id)
-                img(src=event.main_img alt='image').event_list_img.event_detail_img
+      ul#event_ul
+        for event in events
+          li.event_li
+              h1=event.title
+              a(href='/brand/'+event.brand_name+'/'+event.id)
+                  img(src=event.main_img alt='image').event_list_img.event_detail_img
+
           

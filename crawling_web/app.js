@@ -1,29 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const python = require('./python');
+const schedule = require('node-schedule');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var brandRouter = require('./routes/brand');
-var authRouter = require('./routes/auth');
-const {sequelize}=require('./models');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const brandRouter = require('./routes/brand');
+const calendarRouter = require('./routes/calendar');
+const {
+  sequelize
+} = require('./models');
 
-// 파이썬모듈 추가
-var {PythonShell}=require('python-shell');
-
-// 옵션객체 설정
-var options = {
-  mode: 'text',
-  pythonPath: '',
-  pythonOptions: ['-u'],
-  scriptPath: '',
-  args: ['value1', 'value2', 'value3']
-};
-  
-var app = express();
+const app = express();
 sequelize.sync();
 
 // view engine setup
@@ -32,21 +23,23 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/brand',brandRouter);
-app.use('/auth', authRouter);
+app.use('/brand', brandRouter);
+app.use('/calendar', calendarRouter);
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -56,13 +49,18 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// PythonShell.run('./crawler/lotteriaFinish.py',options,function(err,results){
-//   if(err) throw err;
+// var brand_list = ["subway", "starbucks", "burgerking", "gs25", "vips", "papajohns", "twosome"];
+// var i = 0
+// var job = schedule.scheduleJob('30 * * * * *', ()=>{
+//   for(i; i<brand_list.length; i++){
+//     console.log(i)
+//     python(brand_list[i]);
+//     i++;
+//     break;
+//     }
+//     if(i >= brand_list.length) i = 0;
+//   }
+// )
 
-//   console.log('results: %j',results);
-// });
-
-//test.py파일을 호출하여 옵션에 설정 된 것들에따라 실행을 하게함
-//노드가 커맨드 라인을 이용해서 소스파일을 실생시킨다고 생각하는게 좋음
 
 module.exports = app;

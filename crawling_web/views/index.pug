@@ -4,23 +4,27 @@ html
     meta(charset='UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    link(href='https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean', rel='stylesheet')
 
-    title Document
-    link(href='stylesheets/test.css' rel='stylesheet')
+    title 割引
+    link(href='/stylesheets/index.css' rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean', rel='stylesheet')
     
     meta(name='google-signin-client_id')
     script(src="https://code.jquery.com/jquery-3.3.1.min.js")
     block css
   header
     h1#symbol
-      a(href='/') &#xC2EC;&#xBCFC;
+      a(href='/brand') 
+        img#symbolimg(src='/images/logo.png' width="90" height="70") 
+        //- label 割引
     #search
       input(id="search-input" type='text' placeholder='브랜드 입력' name="brand_name")
       button(id="search-button" type="button") 검색
     #login
         span#name
         input#loginBtn(type='button' value='checking...' onclick="\
-            if(this.value === 'Login'){\
+            if(this.value === 'Login with Google'){\
             gauth.signIn({\
             scope:'https://www.googleapis.com/auth/calendar'\
             }).then(function(){\
@@ -36,52 +40,115 @@ html
             }); \
             }\
         ")
+        
   nav
     #global_nav
       ul.nav
         li
-          a(href='') menu1
+          a(href='') 의류
+            ul.sub
+              li
+                a(href='') 남성 상/하의
+              li
+                a(href='') 여성 상/하의
+              li
+                a(href='') 추천상의
+              li
+                a(href='') 추천하의
+              li
+                a(href='') 스포츠웨어
+              li
+                a(href='') 아동복
+              li
+                a(href='') 정장
+              li
+                a(href='') 기타
         li
-          a(href='') menu2
+          a(href='') 음식
+            ul.sub
+              li
+                a(href='') 햄버거
+              li
+                a(href='') 치킨
+              li
+                a(href='') 피자
+              li
+                a(href='') 보쌈/족발
+              li
+                a(href='') 한식
+              li
+                a(href='') 일식
+              li
+                a(href='') 중식
+              li
+                a(href='') 기타
         li
-          a(href='') menu3
+          a(href='') 가전
+            ul.sub
+              li
+                a(href='') 데스크탑/노트북
+              li
+                a(href='') 키보드/마우스
+              li
+                a(href='') TV
+              li
+                a(href='') 냉장고
+              li
+                a(href='') 세탁기
+              li
+                a(href='') 전기밥솥
+              li
+                a(href='') 청소기
+              li
+                a(href='') 난방/냉방기
         li
-          a(href='') menu4
+          a(href='') 생활
+            ul.sub
+              li
+                a(href='') 남성 화장품
+              li
+                a(href='') 여성 화장품
+              li
+                a(href='') 청소용품
+              li
+                a(href='') 반려용품
+              li
+                a(href='') 가구/침구
+              li
+                a(href='') 식기
+              li
+                a(href='') 아동용품
+              li
+                a(href='') 생필품
         li
-          a(href='') menu5
-
+          a(href='') 기타
+            ul.sub
+              li
+                a(href='') 사무용품
+              li
+                a(href='') 취미용품
+              li
+                a(href='') 자동차
+              li
+                a(href='') 아웃도어
+              li
+                a(href='') 나이키
+              li
+                a(href='') 여행/항공
+              li
+                a(href='') 건강
+              li
+                a(href='') 인테리어
   section
-    #authorize-div(style='display: none')
-      span Authorize access to Google Calendar API
-    pre#output.
-    button#authorize-button(onclick='handleAuthClick(event)') Authorize
-    button#authorize-button(onclick='listCalendars()') test
     block content
+    //- #authorize-div(style='display: none')
+    //-   span Authorize access to Google Calendar API
+    //- pre#output.
+    //- button#authorize-button(onclick='handleAuthClick(event)') Authorize
+    //- button#authorize-button(onclick='testAdd()') eventAdd
 
-//- script.
-//-     function onSuccess(googleUser) {
-//-       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-//-     }
-//-     function onFailure(error) {
-//-       console.log(error);
-//-     }
-//-     function renderButton() {
-//-       gapi.signin2.render('my-signin2', {
-//-         'scope': 'profile email',
-//-         'width': 240,
-//-         'height': 50,
-//-         'longtitle': true,
-//-         'theme': 'dark',
-//-         'onsuccess': onSuccess,
-//-         'onfailure': onFailure
-//-       });
-//-     }
 script(src='/javascripts/init.js')
-script(src='/javascripts/calendar.js')
 script(src='https://apis.google.com/js/platform.js?onload=init' async='' defer='')
-script(src="https://apis.google.com/js/client.js?onload=checkAuth")
-//- script(src="https://apis.google.com/js/platform.js" async defer)
-//- script(src="https://apis.google.com/js/platform.js?onload=renderButton" async defer)
 script.
   $('#search-button').on('click', function(){
     var brand_name = $("#search-input").val()

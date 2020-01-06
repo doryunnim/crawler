@@ -1,25 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-var Brand_list = require('../models').Brand_list;
-var User = require('../models').User;
-var User_Brand = require('../models').User_Brand;
 const Event = require('../models').Event;
 const {Like} = require('../models');
+const {Brand_list} = require('../models');
 
-
-// 모든 브랜드 뿌려줌
 router.get('/', function (req, res, next) {
-  // Brand_list.findAll()
-  //       .then((brands)=>{
-  //         console.log(brands);
-  //         res.render('main', {brands});
-  //       })
-  //       .catch((err)=>{
-  //         console.error(err);
-  //         next(err);
-  //       });
-  res.redirect('/');
+  Brand_list.findAll({
+    order: [
+      ['brand_name', 'ASC'],
+    ]
+  })
+    .then((brands)=>{
+      res.render('main', {brands});
+    })
+    .catch((err) =>{;
+      console.error(err)
+      next(err);
+    })
 });
 
 // 브랜드 추가

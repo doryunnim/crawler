@@ -30,7 +30,7 @@ router.get('/register/:profile', async (req, res, next) => {
     } else {
       console.log('user가 있음');
     }
-    return res.redirect('http://localhost:3000/');
+    return res.redirect('http://localhost:3000/brand');
   } catch (error) {
     console.error(error);
     return next(error);

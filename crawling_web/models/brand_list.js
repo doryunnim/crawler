@@ -10,9 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    brand_img: {
-      type: DataTypes.STRING(900),
-    }
   }, {
     timestamps: false,
   });

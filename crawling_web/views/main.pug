@@ -1,28 +1,38 @@
 extends index
 block css
   link(href='/stylesheets/main.css' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean', rel='stylesheet')
+  
   
   
 block content 
   #container
-    #promotion
-      h1 image
+    //- #promotion
+    img.mySlides(src='images/banner0.png' width="1300" height="400")
+    img.mySlides(src='images/banner1.jpg' width="1300" height="400")
+    img.mySlides(src='images/banner2.png' width="1300" height="400")
+    img.mySlides(src='images/banner3.jpg' width="1300" height="400")
+
     h1.sub_title BRAND
-    button#btn brand add
+    button#btn(onclick='testAdd()') 알림 받기
     #brand_list
       ul.brand_bundle
         for brand in brands
           li
           form(action='')
             a(href='/brand/'+brand.brand_name class=brand.brand_name)
-              img(src="images/"+brand.brand_name+".png" width="100" height="100" alt="")
+              img(src="images/"+brand.brand_name+".png" width="80" height="80" alt="")
               .checkcontainer
                 input(type='checkbox', name="like_check" class=brand.brand_name)
       
         
           .container
-
   script(src='/javascripts/check.js')
+  script(src='/javascripts/slide.js')
+  script(src='/javascripts/init.js')
+  script(src='https://apis.google.com/js/platform.js?onload=init' async='' defer='')
+  script(src='/javascripts/calendar.js')
+  script(src="https://apis.google.com/js/client.js?onload=checkAuth")
               
             
 

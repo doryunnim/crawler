@@ -5,21 +5,18 @@ var {Like} = require('../models');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-
   Brand_list.findAll({
     order: [
       ['brand_name', 'ASC'],
     ]
   })
     .then((brands)=>{
-      res.render('main', {brands});
+      res.render('door')
     })
     .catch((err) =>{;
       console.error(err)
       next(err);
     })
-
 });
 
 router.post('/', (req, res, next)=>{
