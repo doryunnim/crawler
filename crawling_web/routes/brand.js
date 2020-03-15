@@ -78,7 +78,7 @@ router.get('/:brand_name/:id', function (req, res, next) {
   Event.findOne({
       where: {
         id: req.params.id
-      }
+      },
     })
     .then((event) => {
       res.render('event_detail', {

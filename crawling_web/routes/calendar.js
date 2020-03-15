@@ -17,7 +17,7 @@ router.post('/add/', async (req, res, next) => {
         }
         if (brand_list) {
             Event.findAll({
-                attributes: ['brand_name', 'title', 'date', ],
+                attributes: ['brand_name', 'title', 'date'],
                 where: {
                     brand_name: [
                         brand_list[0].brand_name,brand_list[1].brand_name,brand_list[2].brand_name,brand_list[3].brand_name,
@@ -34,7 +34,6 @@ router.post('/add/', async (req, res, next) => {
     } catch (error) {
         console.log(error);
     }
-    alert('구글 캘린더에 등록했습니다.')
 });
 
 module.exports = router;
